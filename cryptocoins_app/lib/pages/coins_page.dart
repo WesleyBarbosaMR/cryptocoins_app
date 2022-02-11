@@ -158,7 +158,8 @@ class _CoinsPageState extends State<CoinsPage> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                if (favorites.favList.contains(table[coin]))
+                if (favorites.favList
+                    .any((fav) => fav.initials == table[coin].initials))
                   Icon(
                     Icons.star_rounded,
                     color: Colors.amberAccent[700],
