@@ -1,3 +1,4 @@
+import 'package:cryptocoins_app/pages/configs_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptocoins_app/pages/coins_page.dart';
 import 'package:cryptocoins_app/pages/favorites_page.dart';
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           CoinsPage(),
           FavoritesPage(),
+          ConfigsPage(),
         ],
         onPageChanged: setActPg,
       ),
@@ -87,6 +89,15 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.indigo,
               ),
               label: 'Favoritas',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.settings_outlined, size: 20),
+              selectedIcon: Icon(
+                Icons.settings_rounded,
+                size: 30,
+                color: Colors.indigo,
+              ),
+              label: 'Configurações',
             ),
           ],
         ),

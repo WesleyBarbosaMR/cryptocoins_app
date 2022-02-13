@@ -1,5 +1,6 @@
 // * Import Libraries
 import 'package:cryptocoins_app/configs/hive_config.dart';
+import 'package:cryptocoins_app/repositories/account_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cryptocoins_app/configs/app_settings.dart';
@@ -13,6 +14,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => AccountRepository(),
+        ),
         ChangeNotifierProvider(
           create: (context) => AppSettings(),
         ),
