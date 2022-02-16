@@ -119,7 +119,7 @@ class AccountRepository extends ChangeNotifier {
       );
       _historic.add(Historic(
         opDate: DateTime.fromMillisecondsSinceEpoch(operation['op_date']),
-        opType: operation['opType'],
+        opType: operation['op_type'],
         coin: coin,
         value: operation['value'],
         amount: double.parse(operation['amount']),

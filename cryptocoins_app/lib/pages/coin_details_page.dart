@@ -36,7 +36,6 @@ class _CoinDetailsPageState extends State<CoinDetailsPage> {
   // * Purchase function
   buyCoin() async {
     if (_formKey.currentState!.validate()) {
-      // ! Implement save purchase method
       await account.buy(widget.coin, double.parse(_valueCoin.text));
 
       Navigator.pop(context);
@@ -150,7 +149,8 @@ class _CoinDetailsPageState extends State<CoinDetailsPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Informe o valor da compra';
-                      } else if (double.parse(value) < 50) {
+                      }
+                      if (double.parse(value) < 50) {
                         return 'Valor mínimo para compra de R\$ 50,00';
                       } else if (double.parse(value) > account.bank_balance) {
                         return 'Saldo insuficiente para realizar a compra';
