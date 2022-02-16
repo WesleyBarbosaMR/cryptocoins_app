@@ -144,8 +144,7 @@ class _CoinsPageState extends State<CoinsPage> {
                     child: Icon(Icons.check_circle_outline_rounded),
                   )
                 : SizedBox(
-                    child:
-                        Image.asset('/images/bitcoin.png'), //table[coin].icon),
+                    child: Image.asset(table[coin].icon),
                     width: 40,
                   ),
             title: Row(

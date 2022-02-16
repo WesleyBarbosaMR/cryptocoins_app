@@ -1,5 +1,6 @@
-import 'dart:html';
-
+import 'package:flutter_test/flutter_test.dart';
+import 'package:test_api/test_api.dart';
+import 'package:http/http.dart';
 import 'package:cryptocoins_app/configs/app_settings.dart';
 import 'package:cryptocoins_app/repositories/account_repository.dart';
 import 'package:flutter/material.dart';
