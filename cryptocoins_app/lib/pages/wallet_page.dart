@@ -1,3 +1,4 @@
+import 'package:cryptocoins_app/models/historic.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:test_api/test_api.dart';
 import 'package:http/http.dart';
@@ -58,6 +59,7 @@ class _WalletPageState extends State<WalletPage> {
                   letterSpacing: -1.5,
                 )),
             loadChart(),
+            loadHistoric(),
           ],
         ),
       ),
@@ -131,17 +133,15 @@ class _WalletPageState extends State<WalletPage> {
               child: CircularProgressIndicator(),
             ),
           )
-        : Stack(
-            alignment: Alignment.center,
-            children: [
-              AspectRatio(
-                aspectRatio: 1,
-                child: PieChart(PieChartData(
-                    sectionsSpace: 5,
-                    centerSpaceRadius: 110,
-                    sections: loadWallet(),
-                    pieTouchData: PieTouchData(
-                      /*pieTouchData: PieTouchData(touchCallback:
+        : Stack(alignment: Alignment.center, children: [
+            AspectRatio(
+              aspectRatio: 1,
+              child: PieChart(PieChartData(
+                  sectionsSpace: 5,
+                  centerSpaceRadius: 110,
+                  sections: loadWallet(),
+                  pieTouchData: PieTouchData(
+                    /*pieTouchData: PieTouchData(touchCallback:
                           (FlTouchEvent event, pieTouchResponse) {
                         setState(() {
                           if (!event.isInterestedForInteractions ||
@@ -153,34 +153,50 @@ class _WalletPageState extends State<WalletPage> {
                           touchedIndex = pieTouchResponse
                               .touchedSection!.touchedSectionIndex;
                         });*/
-                      touchCallback: (FlTouchEvent touch, pieTouchResponse) =>
-                          setState(() {
-                        if (!touch.isInterestedForInteractions ||
-                            pieTouchResponse == null ||
-                            pieTouchResponse.touchedSection == null) {
-                          index = -1;
-                          return;
-                        }
-                        index = pieTouchResponse
-                            .touchedSection!.touchedSectionIndex;
-                        setDataChart(index);
-                      }),
-                    ))),
-              ),
-              Column(
-                children: [
-                  Text(chartLabel,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.teal,
-                      )),
-                  Text(real.format(chartValue),
-                      style: TextStyle(
-                        fontSize: 28,
-                      )),
-                ],
-              )
-            ],
-          );
+                    touchCallback: (FlTouchEvent touch, pieTouchResponse) =>
+                        setState(() {
+                      if (!touch.isInterestedForInteractions ||
+                          pieTouchResponse == null ||
+                          pieTouchResponse.touchedSection == null) {
+                        index = -1;
+                        return;
+                      }
+                      index =
+                          pieTouchResponse.touchedSection!.touchedSectionIndex;
+                      setDataChart(index);
+                    }),
+                  ))),
+            ),
+            Column(children: [
+              Text(chartLabel,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.teal,
+                  )),
+              Text(real.format(chartValue),
+                  style: TextStyle(
+                    fontSize: 28,
+                  )),
+            ])
+          ]);
+  }
+
+  loadHistoric() {
+    final historic = account.historic;
+    final date = DateFormat('dd/MM/yyyy - hh:mm');
+    List<Widget> widgets = [];
+    for (var operation in historic) {
+      widgets.add(ListTile(
+        title: Text(operation.coin.coinName),
+        subtitle: Text(date.format(operation.opDate)),
+        trailing: Text(real.format(
+          (operation.coin.cost * operation.amount),
+        )),
+      ));
+      widgets.add(Divider());
+    }
+    return Column(
+      children: widgets,
+    );
   }
 }

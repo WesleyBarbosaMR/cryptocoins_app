@@ -1,3 +1,9 @@
+import 'package:cryptocoins_app/repositories/account_repository.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:test_api/test_api.dart';
+import 'package:http/http.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -25,10 +31,13 @@ class _CoinDetailsPageState extends State<CoinDetailsPage> {
   // * Responsive coin conversor
   late double qtyCoin = 0;
 
+  late AccountRepository account;
+
   // * Purchase function
-  buyCoin() {
+  buyCoin() async {
     if (_formKey.currentState!.validate()) {
       // ! Implement save purchase method
+      await account.buy(widget.coin, double.parse(_valueCoin.text));
 
       Navigator.pop(context);
       // * Purchase feedback
@@ -51,6 +60,8 @@ class _CoinDetailsPageState extends State<CoinDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    account = Provider.of<AccountRepository>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.coin.coinName),
@@ -141,6 +152,8 @@ class _CoinDetailsPageState extends State<CoinDetailsPage> {
                         return 'Informe o valor da compra';
                       } else if (double.parse(value) < 50) {
                         return 'Valor mínimo para compra de R\$ 50,00';
+                      } else if (double.parse(value) > account.bank_balance) {
+                        return 'Saldo insuficiente para realizar a compra';
                       } else {
                         return null;
                       }

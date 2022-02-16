@@ -51,7 +51,7 @@ class DB {
   """;
 
   String get _purchaseHistory => """
-    CREATE TABLE purchase_history (
+    CREATE TABLE purchaseHistory (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       op_date INT,
       op_type TEXT,
