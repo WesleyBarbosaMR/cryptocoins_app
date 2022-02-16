@@ -28,29 +28,29 @@ class DB {
     );
   }
 
-  _onCreate(db, version) async {
+  _onCreate(Database db, int version) async {
     await db.execute(_account);
     await db.execute(_wallet);
-    await db.execute(_purchase_history);
+    await db.execute(_purchaseHistory);
     await db.insert('account', {'bank_balance': 0});
   }
 
-  String get _account => '''
+  String get _account => """
     CREATE TABLE account (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       bank_balance REAL
-    );
-  ''';
+    )
+  """;
 
-  String get _wallet => '''
+  String get _wallet => """
     CREATE TABLE wallet (
       initials TEXT PRIMARY KEY,
       coin TEXT,
-      amount TEXT,
-    );
-  ''';
+      amount TEXT
+    )
+  """;
 
-  String get _purchase_history => '''
+  String get _purchaseHistory => """
     CREATE TABLE purchase_history (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       op_date INT,
@@ -58,7 +58,7 @@ class DB {
       coin TEXT,
       initials TEXT,
       value REAL,
-      amount TEXT,
-    );
-  ''';
+      amount TEXT
+    )
+  """;
 }

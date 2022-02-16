@@ -1,4 +1,5 @@
 import 'package:cryptocoins_app/pages/configs_page.dart';
+import 'package:cryptocoins_app/pages/wallet_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptocoins_app/pages/coins_page.dart';
 import 'package:cryptocoins_app/pages/favorites_page.dart';
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           CoinsPage(),
           FavoritesPage(),
+          WalletPage(),
           ConfigsPage(),
         ],
         onPageChanged: setActPg,
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.blueGrey[200],
           indicatorColor: Colors.blueGrey[100],
           labelTextStyle: MaterialStateProperty.all(const TextStyle(
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
           )),
         ),
@@ -89,6 +91,15 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.indigo,
               ),
               label: 'Favoritas',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.account_balance_wallet_outlined, size: 20),
+              selectedIcon: Icon(
+                Icons.account_balance_wallet_rounded,
+                size: 30,
+                color: Colors.indigo,
+              ),
+              label: 'Carteira',
             ),
             NavigationDestination(
               icon: Icon(Icons.settings_outlined, size: 20),

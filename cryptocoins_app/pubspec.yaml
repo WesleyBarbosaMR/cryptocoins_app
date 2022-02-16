@@ -28,19 +28,20 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  fl_chart: ^0.45.0
   flutter:
     sdk: flutter
-  flutter_test_ui:
+  flutter_test_ui: null
   hive: ^2.0.5
   hive_flutter: ^1.1.0
+  http: null
   intl: ^0.17.0
   path_provider: ^2.0.9
   provider: ^6.0.2
   shared_preferences: ^2.0.13
   sqflite: ^2.0.2
-  test:
-  test_api:
-  http:
+  test: null
+  test_api: null
 
 dev_dependencies:
   flutter_lints: ^1.0.0
